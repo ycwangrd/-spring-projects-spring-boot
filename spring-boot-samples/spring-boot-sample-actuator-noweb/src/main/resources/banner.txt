@@ -5,4 +5,4 @@
     `(_o_o_)'
       )`-'(
 
-Spring Boot${spring-boot.formatted-version}
+Spring Boot-${spring-boot.formatted-version}

@@ -16,30 +16,32 @@
 
 package sample.activemq;
 
-import javax.jms.Queue;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.jms.Queue;
+
 @Component
 public class Producer implements CommandLineRunner {
 
-	@Autowired
-	private JmsMessagingTemplate jmsMessagingTemplate;
+    @Autowired
+    private JmsMessagingTemplate jmsMessagingTemplate;
 
-	@Autowired
-	private Queue queue;
+    @Autowired
+    private Queue queue;
 
-	@Override
-	public void run(String... args) throws Exception {
-		send("Sample message");
-		System.out.println("Message was sent to the Queue");
-	}
+    @Override
+    public void run(String... args) {
+        for (int i = 0; i < 10; i++) {
+            send("Sample message - " + i);
+        }
+        System.out.println("Message was sent to the Queue");
+    }
 
-	public void send(String msg) {
-		this.jmsMessagingTemplate.convertAndSend(this.queue, msg);
-	}
+    public void send(String msg) {
+        this.jmsMessagingTemplate.convertAndSend(this.queue, msg);
+    }
 
 }
